@@ -1,9 +1,53 @@
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ProcessoSeletivo {
     public static void main(String[] args) {
-        selecaoCandidatos();
+        String [] candidatos = {"FELIPE","MARCIA","JULIA","PAULO","AUGUSTO"};
+        for (String candidato: candidatos){
+            entrandoEmContato(candidato);
+        }
+    }
+    static void entrandoEmContato(String candidato){
+        int tentativasRealizadas = 1;
+        boolean continuarTentando = true;
+        boolean atendeu = false;
+        do {
+            atendeu=atender();
+            continuarTentando = !atendeu;
+            if(continuarTentando){
+                tentativasRealizadas++;
+            }else{
+                System.out.println("Contato realizado com sucesso");
+            }
+                
+
+        }while(continuarTentando && tentativasRealizadas < 3);
+        if(atendeu){
+            System.out.println("CONSEGUIMOS CONTATO COM " + candidato + " NA " + tentativasRealizadas);
+        }else{
+            System.out.println("NÃO CONSEGUIMOS CONTATO COM " + candidato + ", NÚMERO MAXIMO DE TENTATIVAS " + tentativasRealizadas);
+        }
+    
+    }
+    static boolean atender(){
+        return new Random().nextInt(3)==1;
+    }
+
+    static void imprimirSelecionados(){
+        String [] candidatos = {"FELIPE","MARCIA","JULIA","PAULO","AUGUSTO"};
+        System.out.println("Imprimindo a lista de candidatos informando o indice do elemento");
+
+        for(int indice=0; indice < candidatos.length; indice++){
+            System.out.println("O candidatos de numero " + indice + " é " + candidatos[indice]);
+        }
+
+        System.out.println("Forma abreviada de interação for each");
+
+        for(String candidato: candidatos){
+            System.out.println("O candidato selecionado foi " + candidato);
+        }
     }
     static void selecaoCandidatos(){
         String [] candidatos = {"FELIPE","MARCIA","JULIA","PAULO","AUGUSTO","MONICA","FABRICIO","MIRELA","DANIELA","JORGE"};
@@ -39,4 +83,5 @@ public class ProcessoSeletivo {
             System.out.println("Aguardando o resultado demais candidatos");
         }
     }
+
 }
